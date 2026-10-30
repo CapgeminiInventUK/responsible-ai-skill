@@ -1,0 +1,14 @@
+{
+  "pack_id": "public-sector-rai",
+  "version": "0.0.0-blocked",
+  "status": "Blocked",
+  "owner": "TBC",
+  "jurisdiction": "TBC",
+  "scope": "TBC",
+  "effective_date": null,
+  "review_date": null,
+  "sources": [],
+  "approvals": [],
+  "controls": [],
+  "severity_rules": []
+}

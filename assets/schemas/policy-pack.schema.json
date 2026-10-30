@@ -1,0 +1,301 @@
+{
+  "type": "object",
+  "properties": {
+    "pack_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Blocked",
+        "Draft",
+        "Approved"
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "jurisdiction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effective_date": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "review_date": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version_or_date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "locator": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "source_id",
+          "title",
+          "version_or_date",
+          "locator"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Policy",
+              "Severity rules"
+            ]
+          },
+          "approver": {
+            "type": "string",
+            "minLength": 1
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "decision_locator": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "kind",
+          "approver",
+          "date",
+          "decision_locator"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "control_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "domain": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mandatory": {
+            "type": "boolean"
+          },
+          "high_impact": {
+            "type": "boolean"
+          },
+          "requirement_type": {
+            "type": "string",
+            "enum": [
+              "Mandatory requirement",
+              "Guidance"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_locator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "applicability_rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected_evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "evidence_status_criteria": {
+            "type": "object",
+            "properties": {
+              "Supported": {
+                "type": "string",
+                "minLength": 1
+              },
+              "Partly supported": {
+                "type": "string",
+                "minLength": 1
+              },
+              "Not evidenced": {
+                "type": "string",
+                "minLength": 1
+              },
+              "Conflicting evidence": {
+                "type": "string",
+                "minLength": 1
+              },
+              "Not assessed": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "Supported",
+              "Partly supported",
+              "Not evidenced",
+              "Conflicting evidence",
+              "Not assessed"
+            ],
+            "additionalProperties": false
+          },
+          "rule_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "control_id",
+          "title",
+          "domain",
+          "mandatory",
+          "high_impact",
+          "requirement_type",
+          "source_id",
+          "source_locator",
+          "applicability_rule",
+          "expected_evidence",
+          "evidence_status_criteria",
+          "rule_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "severity_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "control_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "when_evidence_status": {
+            "type": "string",
+            "enum": [
+              "Supported",
+              "Partly supported",
+              "Not evidenced",
+              "Conflicting evidence",
+              "Not assessed"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "High",
+              "Medium",
+              "Low",
+              "None"
+            ]
+          },
+          "hard_gate": {
+            "type": "string",
+            "enum": [
+              "Triggered",
+              "Not triggered",
+              "Not applicable"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "rule_id",
+          "control_id",
+          "when_evidence_status",
+          "severity",
+          "hard_gate",
+          "rationale"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "pack_id",
+    "version",
+    "status",
+    "owner",
+    "jurisdiction",
+    "scope",
+    "effective_date",
+    "review_date",
+    "sources",
+    "approvals",
+    "controls",
+    "severity_rules"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Responsible AI policy pack contract 1.0.0"
+}

@@ -1,0 +1,836 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "project_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "project_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessment_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "skill_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution_configuration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "review_context": {
+          "type": "string",
+          "enum": [
+            "Self-assessment",
+            "Second-line review",
+            "Formal assurance support"
+          ]
+        },
+        "assessor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessor_independent": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No",
+            "Not supplied"
+          ]
+        },
+        "lifecycle_stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "users_and_impacts": {
+          "type": "string",
+          "minLength": 1
+        },
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "handling_confirmation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "output_location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pack_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pack_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pack_status": {
+          "type": "string",
+          "enum": [
+            "Draft",
+            "Approved"
+          ]
+        },
+        "baseline_label": {
+          "type": "string",
+          "enum": [
+            "Design test - unapproved baseline",
+            "Approved baseline - draft assessment"
+          ]
+        },
+        "design_test_authorisation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completion_status": {
+          "type": "string",
+          "enum": [
+            "Complete",
+            "Partial",
+            "Failed"
+          ]
+        }
+      },
+      "required": [
+        "run_id",
+        "project_id",
+        "project_name",
+        "assessment_time",
+        "created_at",
+        "skill_version",
+        "model_name",
+        "model_version",
+        "execution_configuration",
+        "review_context",
+        "assessor",
+        "assessor_independent",
+        "lifecycle_stage",
+        "purpose",
+        "users_and_impacts",
+        "jurisdiction",
+        "evidence_boundary",
+        "handling_confirmation",
+        "output_location",
+        "pack_id",
+        "pack_version",
+        "pack_status",
+        "baseline_label",
+        "design_test_authorisation",
+        "completion_status"
+      ],
+      "additionalProperties": false
+    },
+    "evidence_manifest": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "filename": {
+            "type": "string",
+            "minLength": 1
+          },
+          "project_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version_or_date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classification": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_locator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "processing_result": {
+            "type": "string",
+            "enum": [
+              "Reviewed",
+              "Partly reviewed",
+              "Unreadable",
+              "Unsupported",
+              "Excluded"
+            ]
+          },
+          "coverage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "evidence_id",
+          "filename",
+          "project_id",
+          "version_or_date",
+          "owner",
+          "classification",
+          "source_locator",
+          "processing_result",
+          "coverage",
+          "limitations",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "control_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "control_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "applicability": {
+            "type": "string",
+            "enum": [
+              "Applicable",
+              "Not applicable",
+              "Pending review"
+            ]
+          },
+          "applicability_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "applicability_decision_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": [
+              "Supported",
+              "Partly supported",
+              "Not evidenced",
+              "Conflicting evidence",
+              "Not assessed"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "evidence_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator_reliable": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "evidence_id",
+                "locator",
+                "locator_reliable"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "source_facts": {
+            "type": "string",
+            "minLength": 1
+          },
+          "interpretation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "finding": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "High",
+              "Medium",
+              "Low",
+              "Unassigned",
+              "None"
+            ]
+          },
+          "rule_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hard_gate": {
+            "type": "string",
+            "enum": [
+              "Triggered",
+              "Not triggered",
+              "Not applicable",
+              "Unassigned"
+            ]
+          }
+        },
+        "required": [
+          "control_id",
+          "applicability",
+          "applicability_reason",
+          "applicability_decision_id",
+          "evidence_status",
+          "evidence_refs",
+          "source_facts",
+          "interpretation",
+          "finding",
+          "rationale",
+          "limitations",
+          "severity",
+          "rule_id",
+          "hard_gate"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "concerns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "concern_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "control_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rule_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "High",
+              "Medium",
+              "Low",
+              "Unassigned"
+            ]
+          },
+          "hard_gate": {
+            "type": "string",
+            "enum": [
+              "Triggered",
+              "Not triggered",
+              "Not applicable",
+              "Unassigned"
+            ]
+          },
+          "finding": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "evidence_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator_reliable": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "evidence_id",
+                "locator",
+                "locator_reliable"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "evidence_gap": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "Open",
+              "Mitigation Planned",
+              "In Progress",
+              "Awaiting Evidence",
+              "Verification",
+              "Closed",
+              "Regression"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proposed_owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "due_date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "closure_evidence_required": {
+            "type": "string",
+            "minLength": 1
+          },
+          "closure_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "closure_decision_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from_state": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "to_state": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "actor_type": {
+                  "type": "string",
+                  "enum": [
+                    "Model proposal",
+                    "Human decision"
+                  ]
+                },
+                "actor": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "decision_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "from_state",
+                "to_state",
+                "timestamp",
+                "actor_type",
+                "actor",
+                "reason",
+                "evidence_ids",
+                "decision_id"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "concern_id",
+          "control_id",
+          "rule_id",
+          "severity",
+          "hard_gate",
+          "finding",
+          "rationale",
+          "evidence_refs",
+          "evidence_gap",
+          "state",
+          "action",
+          "proposed_owner",
+          "due_date",
+          "closure_evidence_required",
+          "closure_evidence_ids",
+          "closure_decision_id",
+          "history"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "decision_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Applicability exception",
+              "Policy interpretation",
+              "Risk acceptance",
+              "Closure",
+              "Hard-gate review",
+              "Other"
+            ]
+          },
+          "actor_type": {
+            "type": "string",
+            "enum": [
+              "Model proposal",
+              "Human decision"
+            ]
+          },
+          "decision_maker": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authority_as_supplied": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "control_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "concern_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "decision_id",
+          "kind",
+          "actor_type",
+          "decision_maker",
+          "authority_as_supplied",
+          "timestamp",
+          "rationale",
+          "control_ids",
+          "concern_ids",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "step": {
+            "type": "string",
+            "minLength": 1
+          },
+          "issue": {
+            "type": "string",
+            "minLength": 1
+          },
+          "affected_control_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "material_effect": {
+            "type": "string",
+            "minLength": 1
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "required_answer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "respondent": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "Open",
+              "Resolved"
+            ]
+          },
+          "answer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "decision_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "question_id",
+          "step",
+          "issue",
+          "affected_control_ids",
+          "material_effect",
+          "blocking",
+          "required_answer",
+          "respondent",
+          "state",
+          "answer",
+          "decision_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Standalone",
+            "Compared",
+            "Limited",
+            "Failed"
+          ]
+        },
+        "previous_run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "compatibility": {
+          "type": "string",
+          "minLength": 1
+        },
+        "differences": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "uncertain_matches": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "mode",
+        "previous_run_id",
+        "compatibility",
+        "differences",
+        "uncertain_matches",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "conclusion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "strengths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "decisions_required": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "conclusion",
+        "strengths",
+        "decisions_required",
+        "next_steps"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "metadata",
+    "evidence_manifest",
+    "control_results",
+    "concerns",
+    "decisions",
+    "open_questions",
+    "comparison",
+    "limitations",
+    "summary"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Responsible AI assessment 1.0.0"
+}

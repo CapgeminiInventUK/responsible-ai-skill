@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "run_id": "TBC",
+    "project_id": "TBC",
+    "project_name": "TBC",
+    "assessment_time": "TBC",
+    "created_at": "TBC",
+    "skill_version": "0.1.0",
+    "model_name": "Not supplied",
+    "model_version": "Not supplied",
+    "execution_configuration": "Not supplied",
+    "review_context": "Self-assessment",
+    "assessor": "TBC",
+    "assessor_independent": "Not supplied",
+    "lifecycle_stage": "TBC",
+    "purpose": "TBC",
+    "users_and_impacts": "TBC",
+    "jurisdiction": "TBC",
+    "evidence_boundary": "TBC",
+    "handling_confirmation": "TBC",
+    "output_location": "TBC",
+    "pack_id": "public-sector-rai",
+    "pack_version": "0.0.0-blocked",
+    "pack_status": "Draft",
+    "baseline_label": "Design test - unapproved baseline",
+    "design_test_authorisation": "TBC",
+    "completion_status": "Failed"
+  },
+  "evidence_manifest": [],
+  "control_results": [],
+  "concerns": [],
+  "decisions": [],
+  "open_questions": [],
+  "comparison": {
+    "mode": "Standalone",
+    "previous_run_id": null,
+    "compatibility": "Previous package not supplied",
+    "differences": [],
+    "uncertain_matches": [],
+    "limitations": []
+  },
+  "limitations": [],
+  "summary": {
+    "conclusion": "Draft - not assessed",
+    "strengths": [],
+    "decisions_required": [],
+    "next_steps": []
+  }
+}
