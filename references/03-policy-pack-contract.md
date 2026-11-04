@@ -1,5 +1,5 @@
 # Policy pack contract
-Read `assets/policy-pack/public-sector-rai.json` and `assets/schemas/policy-pack.schema.json`. Validate the pack with the checklist below before any control assessment.
+Read `assets/public-sector-rai.json` and `assets/policy-pack.schema.json`. Validate the pack with the checklist below before any control assessment.
 ## Required metadata
 Pack ID, version, status (Blocked, Draft, Approved), owner, jurisdiction, scope, effective date, review date, source records, approval records, controls and severity rules. Approval records distinguish policy and severity-rule approval. Approved packs require both, with named supplied approvers, dates and source decision locators. Review/effective dates are checked against runtime UTC date. A structurally valid pack can still be blocked or outside its validity window.
 ## Control contract
@@ -9,7 +9,7 @@ Rules have ID, control ID, exact evidence-status predicate, severity (Critical/H
 
 ## Pack validation checklist
 The model performs this by reading the pack; it is not executable validation. Any failure means the pack is invalid and assessment stops.
-1. The pack follows `assets/schemas/policy-pack.schema.json`.
+1. The pack follows `assets/policy-pack.schema.json`.
 2. Status is not Blocked. Owner, jurisdiction and scope are supplied (not blank, TBC, Not supplied or Unknown).
 3. Effective and review dates are present, and today falls between them.
 4. Source, control and rule IDs are unique, and at least one source and one control exist.

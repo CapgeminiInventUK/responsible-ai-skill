@@ -20,10 +20,10 @@
     "assets/intake.md": "d4ad7e126da43cb8445a1753ea37d65617cc7d8637c5b4635e3834c502ad718d",
     "assets/open-questions.md": "dd9e628f168aeda341d7ee5bf29b190ea1a33aee9bb548f8d505a4ca7b914f6f",
     "assets/report.template.md": "84f281ac71b6cab3b19b79f81c0e09d36f81618b11cea51ac3571695143fc604",
-    "assets/policy-pack/public-sector-rai.json": "e11ad1be5ad66a1cf0287193f6c0ea0018f05b465f96e56d7e6ee93598947952",
-    "assets/policy-pack/README.md": "6d3d639e1c71578dabc549696a5f21ab08c8e197efaeb5fdc64f7fd122954d21",
-    "assets/schemas/assessment.schema.json": "6cf07b8a50990fb12e365c3c1ab56add994c0fdcde07aa2156ee16e1d575e96d",
-    "assets/schemas/policy-pack.schema.json": "174c6f45581a4f4e6e4d33a4ea7a0fec487e928b5a55baf5853453390a4b6fd8",
+    "assets/public-sector-rai.json": "e11ad1be5ad66a1cf0287193f6c0ea0018f05b465f96e56d7e6ee93598947952",
+    "assets/policy-pack-README.md": "6d3d639e1c71578dabc549696a5f21ab08c8e197efaeb5fdc64f7fd122954d21",
+    "assets/assessment.schema.json": "6cf07b8a50990fb12e365c3c1ab56add994c0fdcde07aa2156ee16e1d575e96d",
+    "assets/policy-pack.schema.json": "174c6f45581a4f4e6e4d33a4ea7a0fec487e928b5a55baf5853453390a4b6fd8",
     "evals/requirements-traceability.md": "d4acade04c3210f79e83f696232578471f835a24e26ff83e369a13f8a85d40d5",
     "evals/review-cases.md": "796aeaad662bbc0f19fdd695b616b96400d3b65439cc7a459452681876aec44e"
   }

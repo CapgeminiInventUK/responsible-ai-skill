@@ -14,7 +14,7 @@ One packageable skill derived from the uploaded Responsible AI Agent and MVP PRD
 Alternatively, open the unzipped folder as a workspace in VS Code; `/responsible-ai-assessment` works there via `.github/prompts/`. For other hosts, use the location that host documents for skills. No universal compatibility is claimed.
 No network, credentials, connectors or code execution are used.
 
-**Before assessment:** complete and approve `assets/policy-pack/public-sector-rai.json`, or supply a completed draft and explicitly authorise design testing. The shipped empty scaffold deliberately fails operational validation. Confirm runtime and data-handling controls. See OPEN_QUESTIONS.md.
+**Before assessment:** complete and approve `assets/public-sector-rai.json`, or supply a completed draft and explicitly authorise design testing. The shipped empty scaffold deliberately fails operational validation. Confirm runtime and data-handling controls. See OPEN_QUESTIONS.md.
 
 Example user request: “Assess this project's authorised AI evidence against the bundled public sector pack. Confirm material missing inputs first. Produce the control assessment, concern/action register and output files. Do not modify source files.”
 
