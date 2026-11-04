@@ -13,4 +13,4 @@ These questions are preserved from the MVP or arise from the absence of an appro
 | OQ-08 | Who may confirm applicability exceptions, interpret policy, accept risk and close concerns? | Relevant human decisions | Open |
 | OQ-09 | What pack/model/skill changes permit like-for-like comparison? | Optional comparison claims | Open |
 
-Implementation choices: Markdown/JSON/ZIP, Python helper, schema 1.0.0 and skill 0.1.0. These are explicit bundle design choices, not invented policy decisions. No source approval or control has been manufactured. A future assessor must record project-specific questions separately using the assets template.
+Implementation choices: Markdown/JSON, schema 1.0.0 and skill 0.1.0 (no executable code). These are explicit bundle design choices, not invented policy decisions. No source approval or control has been manufactured. A future assessor must record project-specific questions separately using the assets template.

@@ -8,4 +8,4 @@ The original source files are not redistributed in this bundle. Their names and 
 
 Main changes: remove weighted scoring, maturity score, trust labels and autonomous assurance decisions; replace connector capabilities with manual authorised evidence; add policy-pack approval blocking, control-level evidence status, fixed executable rules, questions, human provenance, read-only handling, optional supplied-package comparison and consistent downloadable records.
 
-New technical artefacts: JSON schemas, exact-status rule engine, report renderer, ZIP exporter, synthetic unit tests and evaluation checklist. These are implementation choices. Their local tests do not establish real policy correctness or Claude tenant compatibility.
+New technical artefacts: JSON schemas, model-performed validation and rule-lookup checklists, report template and evaluation checklist. There is no executable code. These are implementation choices and do not establish real policy correctness or Claude tenant compatibility.
