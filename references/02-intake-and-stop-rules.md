@@ -1,4 +1,5 @@
 # Intake, authority and questions
+Step 0 comes before intake: obtain the responsibility acknowledgement defined in SKILL.md (explicit agreement plus a typed email in valid format). It is not stored or recorded. Without it, do not perform any assessment step; record only `Not started - acknowledgement not given`.
 Use `assets/intake.md`. Establish one project and explicit review purpose: Self-assessment, Second-line review or Formal assurance support. Record assessor independence as Yes, No or Not supplied; ask if it affects the review claim. Do not treat these contexts as equivalent.
 Confirm user authority to upload the evidence, organisation-approved environment, classification/handling restrictions, project segregation, retention requirements and permitted output destination. No credentials are required. Until handling controls are confirmed, use only synthetic or explicitly authorised test evidence.
 A project ID is user-confirmed; a generated run ID is a technical identifier, not an inferred project identity. Record UTC timestamps from the runtime. Never invent model identity, people, ownership, dates or authority.
