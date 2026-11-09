@@ -1,10 +1,10 @@
 # Output, validation and export
-Canonical record: `assets/assessment.template.json`, structured per `assets/assessment.schema.json` (use the schema as the field and value reference) and checked with the manual checklist below. Report: `assets/report.template.md`, filled in by the model from that same record. Questions: `assets/open-questions.md` for paused intake and the canonical array for assessments. Never hand-maintain a second conflicting register.
+Canonical record: `assets/assessment.template.json`, structured per `assets/assessment.schema.json` (use the schema as the field and value reference) and checked with the manual checklist below. Report: a single HTML file built from `assets/output.template.html` that renders only that embedded record. Questions: `assets/open-questions.md` for paused intake and the canonical array for assessments. Never hand-maintain a second conflicting register.
 ## Package contents
-`assessment.json` (run metadata, manifest, results, concerns/actions, decisions, questions, comparison and limitations); `assessment-report.md`; `policy-pack.json` baseline snapshot. Save them as separate files in the output location the user approved, never inside the skill folder. Do not create a ZIP or checksum manifest unless the host can do so verifiably. Raw evidence is not included by default. The user controls saving and sharing. The files are an assessment record, not a workspace update.
+One file, `[project]-rai-assessment.html`, saved to the output location the user approved, never inside the skill folder. `[project]` is the project name in lowercase with runs of non-alphanumeric characters replaced by a single hyphen (for example `farm-funding-assistant-rai-assessment.html`); use the project ID if the name is unavailable. It contains the full record (run metadata, manifest, results, concerns/actions, decisions, questions, assumptions and gaps, comparison and limitations) and the baseline pack snapshot. Do not create a ZIP or checksum manifest unless the host can do so verifiably. Raw evidence is not included by default. The user controls saving and sharing. The file is an assessment record, not a workspace update.
 
 ## Report generation
-Fill each `{{placeholder}}` in `assets/report.template.md` from the matching top-level key of `assessment.json`; do not add or alter findings. `{{counts}}` is derived from `control_results` and `concerns`: control count, Applicable count, evidence-status counts for Applicable controls, unresolved (not Closed) concerns by severity, and the control IDs with a Triggered hard gate. Count by listing the IDs, then total them; recount before finalising.
+Copy `assets/output.template.html` unchanged except for the two placeholders: replace `{{ASSESSMENT_JSON}}` with the completed `assessment.json` content and `{{POLICY_PACK_JSON}}` with the pack content, each as compact valid JSON. Escape every `<` in the JSON as `\u003c`. Do not edit the markup, styles or script, and do not add or alter findings; the page derives all counts, tables and filters from the JSON. Open or re-read the saved file and confirm both blocks parse and no `{{` placeholder remains. The page includes the `assumptions_and_gaps` section, so every gap logged during the run must be in the record.
 
 ## Identifiers and hashes
 Run ID format: `RUN-` followed by the UTC date and time (`YYYYMMDD-HHMMSS`) and four random characters. Without code execution, record SHA-256 as `Not computed` and never estimate or invent a hash. Compute one only if the host provides a tool that actually returns it. Record this as a limitation.
@@ -13,7 +13,7 @@ Complete means processing finished, all controls have results, and no blocking q
 ## Checks
 Validation is performed by the model re-reading the finished record. It is not executable validation and can miss errors; say so in the summary and the limitations. Work through every item, record any failure, fix it and re-check from the start:
 1. Every field in the schema is present with an allowed value; no extra scores, ratings or trust labels.
-2. IDs are unique within each list (evidence, controls, concerns, decisions, questions).
+2. IDs are unique within each list (evidence, controls, concerns, decisions, questions, gaps).
 3. Every reference (evidence, control, concern, decision IDs) points to an existing record, and every citation points to evidence that was Reviewed or Partly reviewed.
 4. Every pack control has exactly one control result, and the evidence manifest is not empty.
 5. Required intake fields are confirmed (not blank, TBC, Not supplied or Unknown), including assessor independence, and project IDs match throughout.
@@ -24,7 +24,8 @@ Validation is performed by the model re-reading the finished record. It is not e
 10. A Closed concern has closure evidence (Reviewed or Partly reviewed), all of it listed in the linked human Closure decision, which names a decision maker and authority.
 11. Resolved questions have an answer. Complete status means no open blocking questions and no Pending review or Not assessed Applicable controls.
 12. Compared mode records the previous run ID.
-13. The report matches the record: every placeholder is filled, and counts and concern details agree with `assessment.json`.
+13. The HTML file contains the complete record: both JSON blocks parse, no `{{` placeholder remains, and the record has the same content as the validated `assessment.json`.
+14. Every user statement of unavailable information or resources during the run has an `assumptions_and_gaps` entry with unique ID, type, handling and affected controls, and none was re-asked.
 
 Review source citations and evidence interpretations manually; this checklist cannot establish their truth. If the host cannot save files, say so and ask for an approved output alternative. Formats and limits are local implementation choices until tested in the selected environment.
 Generated records remain drafts for human review. Summarise project/time/pack, coverage, severity counts, hard gates, material questions and processing limits. No trust label, compliance certificate, deployment recommendation or model sign-off.

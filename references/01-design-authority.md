@@ -12,7 +12,7 @@ Evidence-led Responsible AI review; use-case-specific findings; linked remediati
 - Original WebSearch, OneDrive/SharePoint and People capabilities: do not port them. The MVP is manual, file-based and has no connectors or automatic policy retrieval.
 - Original only-output-templates instruction: replace with MVP concise summary, structured outputs and necessary stop/ask dialogue.
 ## Implementation choices, not source facts
-Markdown report, JSON canonical record, schema version 1.0.0 and skill version 0.1.0 are choices for this bundle. The skill runs without executable code or Python; validation is model-performed. They are not proof of compatibility with a particular Claude tenant. No policy content has been invented to make the package appear operational.
+HTML report with an embedded JSON canonical record, schema 1.0.0 and skill 0.1.0 are choices for this bundle. The skill runs without executable code or Python; validation is model-performed. They are not proof of compatibility with a particular Claude tenant. No policy content has been invented to make the package appear operational.
 
 ## Original domain context retained for pack authors
 These are candidate organising themes from the agent, not approved controls or an adopted baseline. Do not import their original weights or scoring.

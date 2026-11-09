@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Responsible AI assessment</title>
+<style>
+:root{--ink:#123047;--muted:#607783;--blue:#0070a3;--cyan:#00a3d9;--bg:#f4f7f8;--card:#fff;--line:#dce5e8;--high:#a33a2b;--med:#a86014;--ok:#24745a;--lav:#efecfb;--shadow:0 10px 28px rgba(18,48,71,.08)}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select{font:inherit}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav{max-width:1240px;margin:auto;height:68px;display:flex;align-items:center;gap:28px;padding:0 24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:750;white-space:nowrap}
+.mark{width:29px;height:29px;border-radius:9px;background:linear-gradient(145deg,var(--blue),var(--cyan));display:grid;place-items:center;color:white}
+.links{display:flex;gap:8px}
+.links a{color:#536b77;padding:24px 13px 21px;border-bottom:3px solid transparent;text-decoration:none}
+.links a:hover{color:var(--ink);border-color:var(--blue)}
+.wrap{max-width:1240px;margin:auto;padding:32px 24px 80px}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:14px}
+.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:22px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow)}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:750}
+.hero h1{font-size:38px;line-height:1.08;margin:9px 0 10px}
+.sub{color:var(--muted);font-size:17px}
+.notice{margin-top:21px;background:var(--lav);border:1px solid #ded8f3;border-radius:10px;padding:14px 16px;color:#33466b}
+.status{display:inline-flex;gap:8px;align-items:center;background:#fff5e9;color:#8d530e;border:1px solid #f2d8b5;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:750}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0}
+.metric{background:white;border:1px solid var(--line);border-radius:14px;padding:18px}
+.metric b{display:block;font-size:28px}
+.metric span{font-size:13px;color:var(--muted)}
+.metric.high b{color:var(--high)}
+.metric.medium b{color:var(--med)}
+.section{margin-top:34px;scroll-margin-top:84px}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}
+.section h2{margin:0;font-size:23px}
+.filters{display:flex;gap:9px;flex-wrap:wrap}
+.filters input,.filters select{border:1px solid #cddbe0;background:white;border-radius:9px;padding:10px 12px;color:var(--ink)}
+.controls{display:grid;gap:12px}
+.control{background:white;border:1px solid var(--line);border-left:5px solid var(--med);border-radius:12px;overflow:hidden}
+.control.high{border-left-color:var(--high)}
+.control.low,.control.none{border-left-color:var(--ok)}
+.control.unassigned{border-left-color:#8aa0aa}
+.control summary{cursor:pointer;list-style:none;padding:18px;display:grid;grid-template-columns:85px 1.3fr .7fr .6fr 28px;gap:14px;align-items:center}
+.control summary::-webkit-details-marker{display:none}
+.id{font-weight:800;color:var(--blue)}
+.title{font-weight:700}
+.pill{justify-self:start;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:700;background:#fff3e3;color:#8a530e}
+.pill.high{background:#fcebea;color:#9b3027}
+.pill.low,.pill.none{background:#e7f4ef;color:#1d5f49}
+.pill.unassigned{background:#eef2f4;color:#4b616c}
+.gate{font-size:12px;color:var(--muted)}
+.chev{font-size:20px;color:var(--blue);transition:.2s}
+.control[open] .chev{transform:rotate(180deg)}
+.details{border-top:1px solid var(--line);padding:0 18px 20px 117px}
+.finding{font-size:16px;line-height:1.55;margin:18px 0}
+.source{background:#f7f9fa;border:1px solid var(--line);border-left:4px solid #8aa0aa;border-radius:9px;padding:15px;line-height:1.5}
+.source small{display:block;color:var(--muted);margin-bottom:5px}
+.source p{margin:6px 0 0}
+.action{margin-top:13px;background:#eef8fb;border-radius:9px;padding:15px;line-height:1.5}
+.action b{color:var(--blue)}
+.meta{font-size:13px;color:var(--muted);margin-top:8px}
+.evidence{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.tag{background:white;border:1px solid #bdd6df;border-radius:999px;padding:5px 8px;font-size:12px}
+.empty{display:none;background:#fff;border:1px dashed #b9cbd2;border-radius:12px;padding:25px;text-align:center;color:var(--muted)}
+.empty.show{display:block}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cols h3,.panel h3{margin:0 0 8px;font-size:15px}
+.cols ul,.plain{margin:0;padding-left:18px;line-height:1.55}
+.tablewrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+.warn{background:#fff8ed;color:#744a18;border:1px solid #f0d7b5;border-radius:10px;padding:14px 16px}
+.footer{margin-top:35px;padding:17px;border-radius:10px;background:#fff8ed;color:#744a18;border:1px solid #f0d7b5;font-size:14px}
+.footer button{margin-top:10px;border:1px solid #cddbe0;background:white;border-radius:9px;padding:8px 12px;cursor:pointer;color:var(--ink)}
+@media(max-width:850px){.hero,.cols{grid-template-columns:1fr}.links{display:none}.control summary{grid-template-columns:65px 1fr 28px}.pill,.gate{grid-column:2}.details{padding-left:18px}.sectionhead{align-items:stretch;flex-direction:column}}
+@media(max-width:500px){.wrap{padding:22px 14px 50px}.nav{padding:0 14px}.hero h1{font-size:30px}.filters input,.filters select{width:100%}}
+</style>
+</head>
+<body>
+<header class="top"><nav class="nav"><div class="brand"><span class="mark">✓</span>AI Trust Advisor</div><div class="links"><a href="#summary">Summary</a><a href="#controls-section">Assessment</a><a href="#gaps">Assumptions and gaps</a><a href="#evidence">Evidence</a></div></nav></header>
+<main class="wrap" id="app"></main>
+
+<!-- Fill these two blocks only. Write JSON with every "<" escaped as \u003c so it cannot close the script tag. -->
+<script type="application/json" id="assessment-data">{{ASSESSMENT_JSON}}</script>
+<script type="application/json" id="policy-pack-data">{{POLICY_PACK_JSON}}</script>
+<script>
+const $=id=>document.getElementById(id);
+const load=id=>{try{return JSON.parse($(id).textContent)}catch(e){return null}};
+const A=load('assessment-data'),P=load('policy-pack-data')||{};
+const app=$('app');
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const v=x=>esc(x==null||x===''?'Not supplied':x);
+const slug=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const sev=s=>({Critical:'high',High:'high',Medium:'medium',Low:'low',None:'none'}[s]||'unassigned');
+const ul=(a,empty)=>a&&a.length?`<ul class="plain">${a.map(x=>`<li>${v(x)}</li>`).join('')}</ul>`:`<span class="meta">${empty||'None recorded.'}</span>`;
+const table=(heads,rows,empty)=>rows.length?`<div class="tablewrap"><table><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:`<div class="warn">${empty}</div>`;
+const section=(id,eyebrow,title,body)=>`<section class="section" id="${id}"><div class="sectionhead"><div><div class="eyebrow">${eyebrow}</div><h2>${title}</h2></div></div>${body}</section>`;
+
+if(!A||!A.metadata){
+  app.innerHTML='<div class="warn"><b>Template not populated.</b> The assessment data block is missing or is not valid JSON.</div>';
+}else{
+  const M=A.metadata,S=A.summary||{},CR=A.control_results||[],CN=A.concerns||[],GAPS=A.assumptions_and_gaps||[];
+  document.title=`${M.project_name} - Responsible AI assessment`;
+  const open=CN.filter(c=>c.state!=='Closed');
+  const count=f=>open.filter(c=>f.includes(c.severity)).length;
+  const title=id=>((P.controls||[]).find(c=>c.control_id===id)||{}).title||'';
+  const evStatuses=['Supported','Partly supported','Not evidenced','Conflicting evidence','Not assessed'];
+  const applicable=CR.filter(c=>c.applicability==='Applicable');
+  const metrics=[
+    ['',CR.filter(c=>c.evidence_status!=='Not assessed').length,'controls assessed'],
+    ['high',count(['Critical','High']),'critical or high concerns'],
+    ['medium',count(['Medium']),'medium concerns'],
+    ['',count(['Low','Unassigned']),'low or unassigned concerns'],
+    ['',CR.filter(c=>c.hard_gate==='Triggered').length,'hard gates triggered'],
+    ['',CR.filter(c=>c.applicability==='Pending review').length,'pending review'],
+    ['',GAPS.length,'assumptions and gaps']
+  ];
+  const lifecycle=[M.purpose,M.lifecycle_stage,M.review_context].map(v).join(' · ');
+
+  const hero=`<div class="crumb">Assessment / ${v(M.project_name)}</div>
+<section class="hero"><div class="panel"><div class="eyebrow">Responsible AI assessment report</div><h1>${v(M.project_name)}</h1><div class="sub">${lifecycle}</div>
+<div class="notice"><b>Assessment position:</b> ${v(S.conclusion)} Human review is required before any approval or deployment decision.</div></div>
+<aside class="panel"><span class="status">● ${v(M.completion_status)} · ${v(M.baseline_label)}</span><h3 style="margin-top:18px">Evidence status (applicable controls)</h3>
+<div class="evidence">${evStatuses.map(s=>`<span class="tag">${s}: ${applicable.filter(c=>c.evidence_status===s).length}</span>`).join('')}</div>
+<hr style="border:0;border-top:1px solid var(--line);margin:21px 0">
+<div><b>Run ID</b><br><small>${v(M.run_id)}</small></div>
+<div style="margin-top:12px"><b>Baseline</b><br><small>${v(M.pack_id)} · ${v(M.pack_version)} · ${v(M.pack_status)}</small></div>
+<div style="margin-top:12px"><b>Assessed</b><br><small>${v(M.assessment_time)}</small></div></aside></section>
+<section class="summary">${metrics.map(m=>`<div class="metric ${m[0]}"><b>${m[1]}</b><span>${m[2]}</span></div>`).join('')}</section>`;
+
+  const summary=section('summary','Summary','Position, decisions and next steps',`<div class="panel"><div class="cols"><div><h3>Strengths</h3>${ul(S.strengths)}</div><div><h3>Decisions required</h3>${ul(S.decisions_required)}</div><div><h3>Next steps</h3>${ul(S.next_steps)}</div></div></div>`);
+
+  const controls=`<section class="section" id="controls-section"><div class="sectionhead"><div><div class="eyebrow">Control-level assessment</div><h2>Concerns and recommended actions</h2></div>
+<div class="filters"><input id="search" type="search" placeholder="Search controls…" aria-label="Search controls">
+<select id="severity" aria-label="Filter severity"><option value="all">All severities</option>${['Critical','High','Medium','Low','Unassigned','None'].map(s=>`<option>${s}</option>`).join('')}</select>
+<select id="status" aria-label="Filter evidence status"><option value="all">All evidence statuses</option>${evStatuses.map(s=>`<option>${s}</option>`).join('')}</select></div></div>
+<div class="controls" id="controls"></div><div class="empty" id="empty">No controls match the current filters.</div></section>`;
+
+  const gaps=section('gaps','Transparency','Assumptions and gaps',table(['ID','Type','Gap or assumption','What the user said','How it was handled','Controls'],GAPS.map(g=>[v(g.gap_id),v(g.type),v(g.description),v(g.user_statement),v(g.handling),v((g.affected_control_ids||[]).join(', ')||'None')]),'No gaps or assumptions were logged.'));
+
+  const questions=section('questions','Open items','Open questions and paused decisions',table(['ID','Step','Issue','Blocking','State','Answer'],(A.open_questions||[]).map(q=>[v(q.question_id),v(q.step),v(q.issue),q.blocking?'Yes':'No',v(q.state),v(q.answer)]),'No open questions were recorded.'));
+
+  const decisions=section('decisions','Governance','Human decisions and model proposals',table(['ID','Kind','Source','Decision maker (as supplied)','Authority (as supplied)','Time','Rationale'],(A.decisions||[]).map(d=>[v(d.decision_id),v(d.kind),v(d.actor_type),v(d.decision_maker),v(d.authority_as_supplied),v(d.timestamp),v(d.rationale)]),'No decisions were recorded. Nothing in this report is a decision, approval or risk acceptance.'));
+
+  const evidence=section('evidence','Evidence manifest','Evidence reviewed and processing limits',table(['ID','File','Result','Coverage','Locator','Version / owner','Limitations'],(A.evidence_manifest||[]).map(e=>[v(e.evidence_id),v(e.filename),v(e.processing_result),v(e.coverage),v(e.source_locator),`${v(e.version_or_date)} / ${v(e.owner)}`,esc((e.limitations||[]).join('; ')||'None')]),'No evidence was inventoried.'));
+
+  const C=A.comparison||{};
+  const comparison=section('comparison','Optional comparison','Comparison with previous assessment',C.mode&&C.mode!=='Standalone'?`<div class="panel"><p><b>Mode:</b> ${v(C.mode)} · <b>Previous run:</b> ${v(C.previous_run_id)} · <b>Compatibility:</b> ${v(C.compatibility)}</p><h3>Differences</h3>${ul(C.differences)}<h3 style="margin-top:14px">Uncertain matches</h3>${ul(C.uncertain_matches)}<h3 style="margin-top:14px">Comparison limitations</h3>${ul(C.limitations)}</div>`:'<div class="panel">Standalone assessment. No previous package was supplied.</div>');
+
+  const limitations=section('limitations','Limits','Limitations',`<div class="panel">${ul(A.limitations)}</div>`);
+
+  const footer=`<div class="footer"><b>Important:</b> This report is guidance for human review. It is not compliance certification, legal advice, risk acceptance or deployment approval. The full structured record is embedded in this file.<br><button id="dl" type="button">Download assessment data (JSON)</button></div>`;
+
+  app.innerHTML=hero+summary+controls+gaps+questions+decisions+evidence+comparison+limitations+footer;
+
+  const root=$('controls'),search=$('search'),severity=$('severity'),status=$('status'),empty=$('empty');
+  const refTag=r=>`<span class="tag">${v(r.evidence_id)} · ${v(r.locator)}${r.locator_reliable?'':' (locator not reliable)'}</span>`;
+  const row=c=>{
+    const cn=CN.filter(x=>x.control_id===c.control_id);
+    const actions=cn.map(x=>`<div class="action"><b>Recommended action</b> <small>(${v(x.concern_id)} · ${v(x.state)})</small><br>${v(x.action)}
+<div class="meta">Proposed owner: ${v(x.proposed_owner)} · Due: ${v(x.due_date)} · Closure evidence: ${v(x.closure_evidence_required)}${x.evidence_gap?` · Evidence gap: ${v(x.evidence_gap)}`:''}</div></div>`).join('');
+    return `<details class="control ${sev(c.severity)}"><summary><span class="id">${v(c.control_id)}</span><span class="title">${esc(title(c.control_id)||c.control_id)}</span><span class="pill ${sev(c.severity)}">${v(c.severity)} · ${v(c.evidence_status)}</span><span class="gate">Hard gate: ${v(c.hard_gate)}</span><span class="chev">⌄</span></summary>
+<div class="details"><p class="finding">${v(c.finding)}</p>
+<div class="source"><small>WHAT I FOUND IN YOUR DOCUMENTATION</small><b>Source facts</b><p>${v(c.source_facts)}</p><p><b>Interpretation:</b> ${v(c.interpretation)}</p><p><b>Rationale:</b> ${v(c.rationale)}</p>
+<div class="meta">Applicability: ${v(c.applicability)} — ${v(c.applicability_reason)}${c.limitations&&c.limitations.length?` · Limitations: ${esc(c.limitations.join('; '))}`:''}</div>
+<div class="evidence">${(c.evidence_refs||[]).map(refTag).join('')||'<span class="tag">No evidence cited</span>'}</div></div>${actions}</div></details>`;
+  };
+  const render=()=>{
+    const q=search.value.trim().toLowerCase();
+    const rows=CR.filter(c=>(severity.value==='all'||c.severity===severity.value)&&(status.value==='all'||c.evidence_status===status.value)&&(!q||(c.control_id+' '+title(c.control_id)+' '+c.finding).toLowerCase().includes(q)));
+    root.innerHTML=rows.map(row).join('');
+    empty.classList.toggle('show',!rows.length);
+  };
+  [search,severity,status].forEach(el=>el.addEventListener(el===search?'input':'change',render));
+  render();
+
+  $('dl').addEventListener('click',()=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([JSON.stringify(A,null,2)],{type:'application/json'}));
+    a.download=`${slug(M.project_name||M.project_id)||'project'}-rai-assessment.json`;
+    a.click();URL.revokeObjectURL(a.href);
+  });
+}
+</script>
+</body>
+</html>

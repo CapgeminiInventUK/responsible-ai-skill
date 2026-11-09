@@ -719,6 +719,53 @@
         "additionalProperties": false
       }
     },
+    "assumptions_and_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "gap_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Gap",
+              "Assumption"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "user_statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "handling": {
+            "type": "string",
+            "minLength": 1
+          },
+          "affected_control_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "gap_id",
+          "type",
+          "description",
+          "user_statement",
+          "handling",
+          "affected_control_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
     "comparison": {
       "type": "object",
       "properties": {
@@ -826,6 +873,7 @@
     "concerns",
     "decisions",
     "open_questions",
+    "assumptions_and_gaps",
     "comparison",
     "limitations",
     "summary"

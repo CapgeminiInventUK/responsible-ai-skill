@@ -10,7 +10,7 @@
 | FR-07 optional comparison | Step 8; reference 08 | Model-assisted; no guaranteed semantic matcher. |
 | FR-08 read-only | Step 3; reference 04 | Runtime permissions and pre/post integrity checks required. |
 | FR-09 failures | Steps 1-10; completion checks | No success claim on invalid output. |
-| FR-10 downloads | Steps 9-10; reference 09 | Files saved to the user's approved location; host capability untested. |
+| FR-10 downloads | Steps 9-10; reference 09 | One HTML file saved to the user's approved location; host capability untested. |
 | FR-11 validation | Schemas; reference 09 checklist | Model-performed, not executable; not policy reasoning certification. |
 
 User bundle rules: inputs and locations in SKILL; numbered references 01-10 fully indexed; steps name reference numbers; detail loaded on demand; templates separate in assets; material ambiguity recorded and asked, not silently decided.
