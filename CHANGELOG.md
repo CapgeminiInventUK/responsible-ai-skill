@@ -1,6 +1,8 @@
 # Changelog
 ## Unreleased
-HTML output: the assessment is now one self-contained `[project]-rai-assessment.html` built from `assets/output.template.html`, which renders the embedded JSON record and policy-pack snapshot (the template is now data-driven and has no sample content). It replaces `assessment.json`, `assessment-report.md`, the `policy-pack.json` snapshot and `assets/report.template.md`. The page has a button to download the embedded JSON.
+HTML styling: `assets/output.template.html` now follows the Capgemini Visual Identity Playbook 2026 (Ubuntu Sans loaded from Google Fonts when online, which is the only external request, with Segoe UI/Arial fallback offline, Midnight/Capgemini/Light Blue palette, greyscale, semantic Negative/Positive colours, Tangerine for Medium severity). A header toggle switches between the Light and Dark signature themes. Logo artwork: the approved primary logo is embedded inline, positive (Capgemini Blue) on Light and white negative on Dark, switching with the theme.
+
+HTML output: the assessment is now one `[project]-rai-assessment.html` file that embeds its data (fonts aside, see HTML styling) built from `assets/output.template.html`, which renders the embedded JSON record and policy-pack snapshot (the template is now data-driven and has no sample content). It replaces `assessment.json`, `assessment-report.md`, the `policy-pack.json` snapshot and `assets/report.template.md`. The page has a button to download the embedded JSON.
 
 Slash command: removed `.github/prompts/responsible-ai-assessment.prompt.md`, which only worked when this repo was the open workspace and duplicated the skill name. `SKILL.md` is now invoked directly via `/responsible-ai-assessment` (added `argument-hint` and `user-invocable`). `build-zip.ps1` now wraps files in a `responsible-ai-assessment/` folder so the folder name matches the skill name without manual renaming.
 
