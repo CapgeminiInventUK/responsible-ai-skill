@@ -1,7 +1,8 @@
-# Builds responsible-ai-skill.zip with skill files at the zip root (no wrapper folder).
+# Builds responsible-ai-skill.zip with all skill files inside one top-level folder named after the skill.
 $root = $PSScriptRoot
+$skillName = 'responsible-ai-assessment'
 $zipPath = Join-Path $root 'responsible-ai-skill.zip'
-$exclude = '^(\.git|dist)(/|$)|^responsible-ai-skill\.zip$|^build-zip\.ps1$'
+$exclude = '^(\.git|\.github|dist)(/|$)|^responsible-ai-skill\.zip$|^build-zip\.ps1$'
 
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -12,7 +13,7 @@ try {
     Get-ChildItem $root -Recurse -File -Force | ForEach-Object {
         $rel = $_.FullName.Substring($root.Length + 1).Replace('\', '/')
         if ($rel -notmatch $exclude) {
-            [void][IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $_.FullName, $rel)
+            [void][IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $_.FullName, "$skillName/$rel")
         }
     }
 } finally { $zip.Dispose() }

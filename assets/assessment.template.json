@@ -32,6 +32,7 @@
   "concerns": [],
   "decisions": [],
   "open_questions": [],
+  "assumptions_and_gaps": [],
   "comparison": {
     "mode": "Standalone",
     "previous_run_id": null,
